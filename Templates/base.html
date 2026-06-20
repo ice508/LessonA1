@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}School Portal{% endblock %}</title>
+    <style>
+        /* Color Palette Design Definitions */
+        :root {
+            --bg-dark: #0f172a;       /* Deep slate/navy background */
+            --bg-card: #1e293b;       /* Card & element backgrounds */
+            --text-main: #f8fafc;     /* Clean off-white text */
+            --text-muted: #94a3b8;    /* Slate gray text descriptions */
+            --accent-blue: #38bdf8;   /* Highlighting borders & icons */
+            --btn-green: #10b981;     /* Add action buttons */
+            --btn-red: #f43f5e;       /* Delete action buttons */
+            --border-clr: #334155;    /* Subtle dividing borders */
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+        }
+
+        nav { 
+            background: var(--bg-card); 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+            border: 1px solid var(--border-clr);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        nav a { color: var(--text-main); text-decoration: none; font-weight: bold; font-size: 22px; }
+        nav a span { color: var(--accent-blue); }
+
+        form { 
+            background: var(--bg-card); 
+            padding: 25px; 
+            border: 1px solid var(--border-clr); 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+        }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text-muted); }
+        
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            border: 1px solid var(--border-clr); 
+            border-radius: 6px; 
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-size: 15px;
+        }
+        input:focus { outline: none; border-color: var(--accent-blue); }
+
+        button { background: var(--btn-green); color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: bold; }
+        button:hover { opacity: 0.9; }
+
+        /* Table Design Configuration */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-clr); }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border-clr); }
+        th { background-color: #1e293b; color: var(--accent-blue); font-weight: 700; border-bottom: 2px solid var(--border-clr); }
+        tr:hover { background-color: #24334d; }
+
+        /* Dynamic Notification Items */
+        .alert { padding: 12px; border-radius: 6px; margin-bottom: 20px; font-weight: 500; }
+        .alert-error { background-color: #7f1d1d; color: #fca5a5; border: 1px solid #991b1b; }
+        .alert-success { background-color: #064e3b; color: #6ee7b7; border: 1px solid #065f46; }
+
+        footer { margin-top: 60px; text-align: center; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border-clr); padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">🏫 Academy <span>Portal</span></a>
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if 'Error' in message or 'removed' in message %}alert-error{% else %}alert-success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        &copy; 2026 Academy Management Systems
+    </footer>
+
+</body>
+</html>
